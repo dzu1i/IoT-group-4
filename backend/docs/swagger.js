@@ -5,10 +5,10 @@ const options = {
   definition: {
     openapi: "3.0.3",
     info: {
-      title: "HumiGrow Backend API",
+      title: "humigrow Backend API",
       version: "1.0.0",
       description:
-        "REST API for HumiGrow IoT temperature/humidity/battery measurements. Follows UU App pattern (dtoIn/dtoOut, warnings, error codes).",
+        "REST API for humigrow IoT temperature/humidity/battery measurements. Follows UU App pattern (dtoIn/dtoOut, warnings, error codes).",
     },
     servers: [{ url: "/", description: "This server" }],
     tags: [{ name: "Measurement", description: "Measurement records from IoT nodes." }],

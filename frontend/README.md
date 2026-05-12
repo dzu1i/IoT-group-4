@@ -1,6 +1,6 @@
-# Greenhouse Monitor Frontend
+# humigrow Frontend
 
-React frontend for the HumiGrow greenhouse monitor dashboard.
+React frontend for the humigrow greenhouse monitor dashboard.
 
 It shows current temperature and humidity, optimal ranges, alerts for values outside the optimal range, historical chart data, recent readings, and a page with all readings.
 

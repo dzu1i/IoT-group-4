@@ -1,4 +1,4 @@
-# HumiGrow – Tým 4
+# humigrow – Tým 4
 
 IoT projekt pro měření teploty, vlhkosti a stavu baterie ve skleníku. Repo obsahuje backend (REST API + DB), HW firmware a místo pro frontend.
 

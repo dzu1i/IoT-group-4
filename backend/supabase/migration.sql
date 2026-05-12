@@ -1,5 +1,5 @@
 -- ============================================================
--- HumiGrow – Supabase migration
+-- humigrow – Supabase migration
 -- Table: measurement
 -- ============================================================
 
