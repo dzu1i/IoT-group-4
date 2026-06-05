@@ -1,6 +1,6 @@
 import { mockReadings } from "../data/mockReadings.js";
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL ?? import.meta.env.VITE_API_URL ?? (import.meta.env.DEV ? "http://localhost:3000" : "");
+const BASE_URL = import.meta.env.VITE_API_BASE_URL ?? import.meta.env.VITE_API_URL ?? (import.meta.env.DEV ? "http://localhost:3000" : "https://iot-group-4-production.up.railway.app");
 
 const API_CONFIG = {
   listUrl: `${BASE_URL}/humigrow/measurement/list`,
