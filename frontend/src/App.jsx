@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import { Topbar } from "./components/Topbar.jsx";
 import { useMeasurements } from "./hooks/useMeasurements.js";
 import { useRoute } from "./hooks/useRoute.js";
@@ -9,11 +10,22 @@ import { Login } from "./pages/Login.jsx";
 import { Locations } from "./pages/Locations.jsx";
 import { sortReadingsNewestFirst } from "./utils/readings.js";
 
-export function App() {
+const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID ?? "";
+
+function AppInner() {
   const { readings, isLoading } = useMeasurements();
   const { route, deviceId, navigate } = useRoute();
   const { isDark, toggleTheme } = useTheme();
-  const [isLoggedIn, setIsLoggedIn] = useState(() => localStorage.getItem("humigrow:isLoggedIn") === "true");
+  const [user, setUser] = useState(() => {
+    try {
+      const stored = localStorage.getItem("humigrow:user");
+      return stored ? JSON.parse(stored) : null;
+    } catch {
+      return null;
+    }
+  });
+
+  const isLoggedIn = !!user;
 
   const sortedReadings = useMemo(() => sortReadingsNewestFirst(readings), [readings]);
   const selectedReadings = useMemo(
@@ -22,14 +34,15 @@ export function App() {
   );
   const latestReading = selectedReadings[0] || sortedReadings[0];
 
-  function handleLogin() {
-    setIsLoggedIn(true);
+  function handleLogin(userInfo) {
+    setUser(userInfo);
+    localStorage.setItem("humigrow:user", JSON.stringify(userInfo));
     navigate("dashboard");
   }
 
   function handleLogout() {
-    setIsLoggedIn(false);
-    localStorage.removeItem("humigrow:isLoggedIn");
+    setUser(null);
+    localStorage.removeItem("humigrow:user");
     navigate("login");
   }
 
@@ -37,17 +50,11 @@ export function App() {
     navigate(isLoggedIn ? "dashboard" : "login");
   }
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      localStorage.setItem("humigrow:isLoggedIn", "true");
-    }
-  }, [isLoggedIn]);
-
   const showLogin = route === "login" || !isLoggedIn;
 
   return (
     <>
-      <Topbar isLoggedIn={isLoggedIn} onBrandClick={handleBrandClick} onLogout={handleLogout} onToggleTheme={toggleTheme} />
+      <Topbar user={user} onBrandClick={handleBrandClick} onLogout={handleLogout} onToggleTheme={toggleTheme} />
       <main className={showLogin ? "login-shell" : "page-shell"}>
         {showLogin ? (
           <Login isDark={isDark} onLogin={handleLogin} />
@@ -64,5 +71,13 @@ export function App() {
         )}
       </main>
     </>
+  );
+}
+
+export function App() {
+  return (
+    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+      <AppInner />
+    </GoogleOAuthProvider>
   );
 }

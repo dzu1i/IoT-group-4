@@ -121,6 +121,45 @@ a {
   border-color: #b7c6d8;
 }
 
+.topbar-user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.topbar-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--line);
+}
+
+.topbar-avatar-initials {
+  display: grid;
+  place-items: center;
+  background: var(--green);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.topbar-username {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .topbar-username {
+    display: none;
+  }
+}
+
 .icon-button {
   display: grid;
   width: 40px;
@@ -285,6 +324,27 @@ a {
   justify-self: center;
   color: #64748b;
   font-size: 16px;
+}
+
+.login-error {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #fee2e2;
+  color: #b91c1c;
+  font-size: 14px;
+}
+
+:root.dark .login-error {
+  background: #3b0f0f;
+  color: #fca5a5;
+}
+
+.google-login-button:disabled {
+  opacity: 0.65;
+  cursor: wait;
 }
 
 .locations-page {

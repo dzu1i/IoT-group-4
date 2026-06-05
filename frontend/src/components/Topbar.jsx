@@ -1,9 +1,9 @@
 import React from "react";
 
-export function Topbar({ isLoggedIn, onBrandClick, onLogout, onToggleTheme }) {
+export function Topbar({ user, onBrandClick, onLogout, onToggleTheme }) {
   return (
     <header className="topbar">
-      <button className="brand brand-button" type="button" onClick={onBrandClick} aria-label={isLoggedIn ? "HumiGrow dashboard" : "HumiGrow login"}>
+      <button className="brand brand-button" type="button" onClick={onBrandClick} aria-label={user ? "HumiGrow dashboard" : "HumiGrow login"}>
         <span className="brand-mark" aria-hidden="true">
           <svg viewBox="0 0 24 24" role="img">
             <path d="M19 3c-6.8.2-11.9 4.2-12.7 10.4-.5 3.7 1.7 6.8 5 7.6v-5.1l-2.9 1.8 1.2-3.2 1.7-1.1v-2.9h2.2v1.5l3.8-2.4-1.2 3.2-2.6 1.7V21c3.9-.7 6.7-4.1 6.7-8.3 0-2.5-.7-5.9-1.2-9.7Z" />
@@ -12,10 +12,22 @@ export function Topbar({ isLoggedIn, onBrandClick, onLogout, onToggleTheme }) {
         <span>HumiGrow</span>
       </button>
       <div className="top-actions">
-        {isLoggedIn ? (
-          <button className="logout-button" type="button" onClick={onLogout}>
-            Logout
-          </button>
+        {user ? (
+          <>
+            <div className="topbar-user">
+              {user.picture ? (
+                <img className="topbar-avatar" src={user.picture} alt={user.name ?? "User"} referrerPolicy="no-referrer" />
+              ) : (
+                <span className="topbar-avatar topbar-avatar-initials" aria-hidden="true">
+                  {(user.name ?? user.email ?? "?").charAt(0).toUpperCase()}
+                </span>
+              )}
+              <span className="topbar-username">{user.given_name ?? user.name}</span>
+            </div>
+            <button className="logout-button" type="button" onClick={onLogout}>
+              Logout
+            </button>
+          </>
         ) : null}
         <button className="icon-button" type="button" aria-label="Toggle theme" onClick={onToggleTheme}>
           <svg viewBox="0 0 24 24" aria-hidden="true">
