@@ -108,7 +108,7 @@ export function Locations({ readings, onNavigate }) {
         })}
       </div>
 
-      <footer className="locations-footer">© 2025 HumiGrow. All rights reserved.</footer>
+      <footer className="locations-footer">© 2026 HumiGrow. All rights reserved.</footer>
     </section>
   );
 }

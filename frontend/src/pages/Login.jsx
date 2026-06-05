@@ -71,7 +71,7 @@ export function Login({ isDark, onLogin }) {
 
       <img className="greenhouse-image" src={imageSrc} alt="" aria-hidden="true" />
 
-      <footer className="login-footer">© 2025 humigrow. All rights reserved.</footer>
+      <footer className="login-footer">© 2026 humigrow. All rights reserved.</footer>
     </section>
   );
 }

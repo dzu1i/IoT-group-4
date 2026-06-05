@@ -29,7 +29,7 @@ export function Dashboard({ latestReading, readings, selectedDeviceId, onNavigat
           </button>
         )}
       />
-      <footer className="detail-footer">© 2025 HumiGrow. All rights reserved.</footer>
+      <footer className="detail-footer">© 2026 HumiGrow. All rights reserved.</footer>
     </section>
   );
 }
